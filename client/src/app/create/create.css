@@ -1,0 +1,47 @@
+.create-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.create-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.snippet-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.snippet-form label {
+    font-weight: bold;
+}
+
+.snippet-form input,
+.snippet-form textarea,
+.snippet-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.snippet-form textarea {
+    height: 100px;
+}
+
+.snippet-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.snippet-form button:hover {
+    background-color: #0056b3;
+}
