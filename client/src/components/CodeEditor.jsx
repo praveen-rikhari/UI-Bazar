@@ -71,7 +71,18 @@ const CodeEditor = () => {
                 <h3>Result</h3>
                 <iframe
                     className="result"
-                    srcDoc={`<!DOCTYPE html><html><head><style>${cssCode}</style></head><body>${htmlCode}</body></html>`}
+                    srcDoc={`
+                    <!DOCTYPE html>
+                    <html>
+                        <head>
+                            <style>
+                                ${cssCode}
+                            </style>
+                        </head>
+                        <body>
+                            ${htmlCode}
+                        </body>
+                    </html>`}
                 />
             </div>
         </div>

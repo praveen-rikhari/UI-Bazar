@@ -4,7 +4,7 @@ body {
 }
 
 .nav-container {
-    padding:10px 40px;
+    padding: 10px 40px;
     border-bottom: 2px solid #d1d5db;
     display: flex;
     justify-content: space-between;
@@ -30,19 +30,17 @@ body {
 .logo-image {
     cursor: pointer;
     width: 60px;
-    height: 60px;
+    height: 50px;
 }
 
 .site-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-left: 12px;
+    font-size: 30px;
+    font-weight: 900;
+    margin: 20px 0 0 10px;
     font-style: italic;
-}
-
-.site-subtitle {
-    color: #fbbf24;
-    font-style: normal;
+    background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .navbar {
@@ -59,7 +57,8 @@ body {
 }
 
 .nav-item {
-    font-size: 1rem;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .nav-item a {
@@ -71,7 +70,32 @@ body {
     color: #fbbf24;
 }
 
+.create-btn {
+    border: none;
+    background-color: #8d4bd0;
+    border-radius: 6px;
+    padding: 8px 10px;
+    transition: all ease-in-out 0.12s;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-btn span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+    gap: 5px;
+}
+
+.create-btn:hover {
+    background-color: #6816c8;
+}
+
 .nav-right {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 25px;
 }
