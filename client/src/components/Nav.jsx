@@ -2,12 +2,14 @@ import {
     SignInButton,
     SignedIn,
     SignedOut,
-    UserButton
+    UserButton,
+    SignUpButton
 } from "@clerk/nextjs";
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { IoMdAddCircle } from "react-icons/io";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 import './Nav.css';
 
 function nav() {
@@ -36,11 +38,10 @@ function nav() {
                             <Link href="/">Home</Link>
                         </li>
 
-                        <SignedOut>
-                            <li className="nav-item">
-                                <SignInButton />
-                            </li>
-                        </SignedOut>
+                        <li className="nav-item">
+                            <Link href="/browse">Browse</Link>
+                        </li>
+
                         <SignedIn>
                             <li className="nav-item">
                                 <Link href="/profile">Profile</Link>
@@ -51,16 +52,40 @@ function nav() {
             </div>
             <div className="nav-right">
                 <ul className="nav-list">
-                    <li className="nav-item">
-                        <Link href="/create">
-                            <button className="create-btn">
-                                <span>
-                                    <IoMdAddCircle /> Create
-                                </span>
+                    <SignedIn>
+                        <li className="nav-item">
+                            <Link href="/create">
+                                <button className="create-btn">
+                                    <span>
+                                        <IoMdAddCircle size={30}/> Create
+                                    </span>
 
-                            </button>
-                        </Link>
-                    </li>
+                                </button>
+                            </Link>
+                        </li>
+                    </SignedIn>
+
+                    <SignedOut>
+                        <li className="nav-item">
+                            <SignInButton>
+                                <button className="auth-btn in">
+                                    SIGN IN <span className="arrow">
+                                        <IoIosArrowDroprightCircle size={30} />
+                                    </span>
+                                </button>
+                            </SignInButton>
+                        </li>
+                        <li className="nav-item">
+                            <SignUpButton>
+                                <button className="auth-btn">
+                                    SIGN UP <span className="arrow">
+                                        <IoIosArrowDroprightCircle size={30} />
+                                    </span>
+                                </button>
+                            </SignUpButton>
+                        </li>
+                    </SignedOut>
+
                 </ul>
                 <UserButton />
             </div>
