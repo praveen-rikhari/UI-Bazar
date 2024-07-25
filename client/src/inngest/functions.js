@@ -13,12 +13,17 @@ export const syncUser = inngest.createFunction(
             e.id === user.primary_email_address_id
         ).email
         //   await database.users.insert({ id, email, first_name, last_name })
-        const newUser = await new User({
-            clerk_user_id: id,
-            first_name,
-            last_name,
-            email
-        });
-        await newUser.save();
+        try {
+            dbConnect();
+            const newUser = await new User({
+                clerk_user_id: id,
+                first_name,
+                last_name,
+                email
+            });
+            await newUser.save();
+        } catch (error) {
+            console.log(error);
+        }
     }
 )
