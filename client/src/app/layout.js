@@ -1,13 +1,13 @@
-import { Montserrat } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Montserrat({ subsets: ["latin"] });
+const inter = Quicksand({ subsets: ["latin"] });
 
 export const metadata = {
   title: "UI-Bazar",
-  description: "Open Source free UI snippets",
+  description: "Free & Open Source UI snippets",
 };
 
 export default function RootLayout({ children }) {

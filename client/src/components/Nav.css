@@ -72,10 +72,9 @@ body {
 
 .create-btn {
     border: none;
-    background-color: #8d4bd0;
+    background-image: linear-gradient(90deg, #f380d3 0%, #206df2 100%);
     border-radius: 6px;
     padding: 8px 10px;
-    transition: all ease-in-out 0.12s;
     font-size: 16px;
     cursor: pointer;
 }
@@ -90,7 +89,7 @@ body {
 }
 
 .create-btn:hover {
-    background-color: #6816c8;
+    background-image: linear-gradient(90deg, #206df2 0%, #f380d3 100%);
 }
 
 .auth-btn {
