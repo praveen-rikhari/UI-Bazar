@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 function dbConnect(){
     try {
-        mongoose.connect("mongodb://127.0.0.1:27017/clerkInngest")
+        mongoose.connect(process.env.MONGO_URL)
     } catch (error) {
         console.log(error);
     }
