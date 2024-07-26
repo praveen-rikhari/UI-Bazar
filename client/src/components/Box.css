@@ -1,0 +1,26 @@
+.box {
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: inline-block;
+    width: 200px;
+    margin: 15px;
+    transition: 0.15s;
+}
+
+.icon {
+    margin-bottom: 8px;
+}
+
+.text {
+    color: #333;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.box:hover{
+    transform: scale(1.2);
+}
