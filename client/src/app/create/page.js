@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import CodeEditor from '@/components/CodeEditor';
 import "./create.css"
+import { useAuth } from '@clerk/nextjs';
 
 const Create = () => {
     const [name, setName] = useState('');
@@ -9,10 +10,12 @@ const Create = () => {
     const [category, setCategory] = useState('');
     const [htmlCode, setHtmlCode] = useState('');
     const [cssCode, setCssCode] = useState('');
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({
+            userId: userId,
             name,
             description,
             category,
