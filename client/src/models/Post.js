@@ -8,7 +8,9 @@ const postSchema = new Schema({
     htmlCode: { type: String, required: true },
     cssCode: { type: String, required: true },
     likesCount: { type: Number, default: 0 }
+}, {
+    timestamps: true,
 });
 
-const Post = models.Post || model("Post" , postSchema);
+const Post = models.Post || model("Post", postSchema);
 export default Post;
