@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import CodeEditor from '@/components/CodeEditor';
 import "./create.css"
 import { useAuth } from '@clerk/nextjs';
+import axios from 'axios';
 
 const Create = () => {
     const [name, setName] = useState('');
@@ -12,20 +13,29 @@ const Create = () => {
     const [cssCode, setCssCode] = useState('');
     const { isLoaded, userId, sessionId, getToken } = useAuth();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({
+        const postData = {
             userId: userId,
             name,
             description,
             category,
             htmlCode,
             cssCode
-        });
+        };
+
+        try {
+            const response = await axios.post('/api/post' , postData);
+            if(response){
+                console.log( "Post created Successfully" , response);
+            }
+        } catch (error) {
+            console.error('Error while creating post :', error);
+        }
     };
 
     return (
-        <div className='create-page'>
+        <div className="create-page">
             <h1>Create a new Snippet</h1>
 
             <div className="snippet-form">
