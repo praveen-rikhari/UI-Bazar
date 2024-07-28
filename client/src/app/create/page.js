@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import CodeEditor from '@/components/CodeEditor';
 import "./create.css"
-
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 
@@ -12,11 +11,14 @@ const Create = () => {
     const [category, setCategory] = useState('');
     const [htmlCode, setHtmlCode] = useState('');
     const [cssCode, setCssCode] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
     const { isLoaded, userId, sessionId, getToken } = useAuth();
-    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true); // Disable the button
+
         const postData = {
             userId: userId,
             name,
@@ -30,19 +32,37 @@ const Create = () => {
             const response = await axios.post('/api/post', postData);
             if (response) {
                 console.log("Post created Successfully", response);
-                router.push("/browse");
+                setSuccessMessage(true); // Show success message
+                // Clear form fields
+                setName('');
+                setDescription('');
+                setCategory('');
+                setHtmlCode('');
+                setCssCode('');
+
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    setSuccessMessage(false);
+                }, 3000);
             }
         } catch (error) {
             console.error('Error while creating post :', error);
+        } finally {
+            setIsSubmitting(false); // Enable the button
         }
     };
 
     return (
         <div className="create-page">
             <h1>Create a new Snippet</h1>
-                <CodeEditor />
+            <CodeEditor />
 
             <div className="snippet-form">
+                {successMessage && (
+                    <div className="success-message">
+                        Your UI snippet has been submitted! You can view it on the browse page.
+                    </div>
+                )}
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Snippet Name:</label>
@@ -50,19 +70,16 @@ const Create = () => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <label>Description:</label>
-                        <input
-                            type="text"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            disabled={isSubmitting} // Disable the input fields
                         />
                     </div>
                     <div>
                         <label>Category:</label>
-                        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <select
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            disabled={isSubmitting} // Disable the input fields
+                        >
                             <option value="">Select a category</option>
                             <option value="Button">Button</option>
                             <option value="CheckBox">CheckBox</option>
@@ -79,6 +96,7 @@ const Create = () => {
                         <textarea
                             value={htmlCode}
                             onChange={(e) => setHtmlCode(e.target.value)}
+                            disabled={isSubmitting} // Disable the input fields
                         />
                     </div>
                     <div>
@@ -86,9 +104,12 @@ const Create = () => {
                         <textarea
                             value={cssCode}
                             onChange={(e) => setCssCode(e.target.value)}
+                            disabled={isSubmitting} // Disable the input fields
                         />
                     </div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Submitting......' : 'Submit'}
+                    </button>
                 </form>
             </div>
         </div>
