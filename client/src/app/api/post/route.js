@@ -15,3 +15,13 @@ export async function POST(req) {
     }
 }
 
+export async function GET() {
+    try {
+        dbConnect();
+        const allPosts = await Post.find({});
+        return NextResponse.json(allPosts);
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json("Error in getting the post.........");
+    }
+}

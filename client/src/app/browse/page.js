@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./browse.css"
+import Link from 'next/link';
 
 const Browse = () => {
     const [posts, setPosts] = useState([]);
@@ -9,11 +10,9 @@ const Browse = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('/api/getPosts');
-                if (response) {
-                    console.log(response.data);
-                    setPosts(response.data);
-                }
+                const response = await axios.get('/api/post');
+                console.log(response.data);
+                setPosts(response.data);
             } catch (error) {
                 console.error("Error while fetching posts : ", error);
             }
@@ -33,6 +32,7 @@ const Browse = () => {
                             <p>
                                 {post.description}
                             </p>
+                            <Link href={`/snip-page/${post._id}`}>go to snip-page</Link>
                             <div className="code-preview" dangerouslySetInnerHTML={{ __html: post.htmlCode }} />
                             <style>{post.cssCode}</style>
                         </div>
