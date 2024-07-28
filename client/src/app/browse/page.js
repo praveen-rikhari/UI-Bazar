@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import "./browse.css"
 
 const Browse = () => {
     const [posts, setPosts] = useState([]);
@@ -20,15 +21,15 @@ const Browse = () => {
         fetchPosts();
     }, [])
     return (
-        <div className="home-page">
+        <div className="browse-page">
             <h1>All Snippets</h1>
             <div className="posts-container">
                 {
                     posts.map((post) => (
                         <div key={post._id} className='post-card'>
-                            <h2>
+                            <h3>
                                 {post.name}
-                            </h2>
+                            </h3>
                             <p>
                                 {post.description}
                             </p>
