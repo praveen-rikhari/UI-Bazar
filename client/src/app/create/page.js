@@ -37,9 +37,9 @@ const Create = () => {
     return (
         <div className="create-page">
             <h1>Create a new Snippet</h1>
+                <CodeEditor />
 
             <div className="snippet-form">
-                <CodeEditor />
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Snippet Name:</label>
