@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import CodeEditor from '@/components/CodeEditor';
 import "./create.css"
+
 import { useAuth } from '@clerk/nextjs';
 import axios from 'axios';
 
@@ -12,6 +13,7 @@ const Create = () => {
     const [htmlCode, setHtmlCode] = useState('');
     const [cssCode, setCssCode] = useState('');
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,9 +27,10 @@ const Create = () => {
         };
 
         try {
-            const response = await axios.post('/api/post' , postData);
-            if(response){
-                console.log( "Post created Successfully" , response);
+            const response = await axios.post('/api/post', postData);
+            if (response) {
+                console.log("Post created Successfully", response);
+                router.push("/browse");
             }
         } catch (error) {
             console.error('Error while creating post :', error);
