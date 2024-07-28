@@ -32,16 +32,8 @@ const Browse = () => {
                             <p>
                                 {post.description}
                             </p>
-                            <pre>
-                                <code>
-                                    {post.htmlCode}
-                                </code>
-                            </pre>
-                            <pre>
-                                <code>
-                                    {post.cssCode}
-                                </code>
-                            </pre>
+                            <div className="code-preview" dangerouslySetInnerHTML={{ __html: post.htmlCode }} />
+                            <style>{post.cssCode}</style>
                         </div>
                     ))
                 }
