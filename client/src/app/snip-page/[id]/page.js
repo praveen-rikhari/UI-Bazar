@@ -1,10 +1,11 @@
 "use client"
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './SnipPage.css'
+import './SnipPage.css';
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
+    const [activeTab, setActiveTab] = useState('html');
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -14,80 +15,103 @@ const SnipPage = ({ params }) => {
                     setPosts(response.data);
                     console.log(response.data);
                 }
-
             } catch (error) {
                 console.error("Error while fetching single post : ", error);
             }
-        }
+        };
         fetchPosts();
-    }, [])
+    }, [params.id]);
 
     const createIframeContent = (htmlCode, cssCode) => {
         const iframeDocument = `
-                                <html>
-                                <head>
-                                    <style>
-                                        body {
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                            height: 100vh;
-                                            margin: 0;
-                                        }
-                                        ${cssCode}
-                                    </style>
-                                </head>
-                                <body>
-                                    ${htmlCode}
-                                </body>
-                            </html>
+            <html>
+            <head>
+                <style>
+                    body {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        margin: 0;
+                        background-color: #f4f4f4;
+                    }
+                    ${cssCode}
+                </style>
+            </head>
+            <body>
+                ${htmlCode}
+            </body>
+            </html>
         `;
         return iframeDocument;
     };
 
-    function copyToClipboard(text) {
+    const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text).then(() => {
             alert('Copied to clipboard!');
         }, (err) => {
             console.error('Could not copy text: ', err);
         });
-    }
+    };
 
     return (
         <div className="singlePost-page">
             <div className="post-container">
-                {
-                    <div className='post-card'>
-                        <h3>
-                            {posts.name}
-                        </h3>
+                <div className='post-card'>
+                    <h3>{posts.name}</h3>
+                    <div className="content-wrapper">
                         <iframe
                             srcDoc={createIframeContent(posts.htmlCode, posts.cssCode)}
-                            className="code-preview"
+                            className="code-preview1"
                             title={`Post ${posts._id}`}
                             sandbox="allow-scripts allow-same-origin"
                         />
-                        <div className='htmlCode-box'>
-                            <code>
-                                {posts.htmlCode}
-                            </code>
-                            <button className="copy-button" onClick={() => copyToClipboard(posts.htmlCode)}>
-                                Copy HTML
-                            </button>
-                        </div>
-                        <div className='cssCode-box'>
-                            <code>
-                                {posts.cssCode}
-                            </code>
-                            <button className="copy-button" onClick={() => copyToClipboard(posts.cssCode)}>
-                                Copy CSS
-                            </button>
+
+                        <div className="code-box">
+                            <div className="tab-buttons">
+                                <button
+                                    className={`tab-button ${activeTab === 'html' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('html')}
+                                >
+                                    HTML
+                                </button>
+
+                                <button
+                                    className={`tab-button ${activeTab === 'css' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('css')}
+                                >
+                                    CSS
+                                </button>
+                            </div>
+                            <div className='code-content'>
+                                {
+                                    activeTab === 'html' ? (
+                                        <>
+                                            <code>
+                                                {posts.htmlCode}
+                                            </code>
+                                            <button className="copy-button" onClick={() => copyToClipboard(posts.htmlCode)}>
+                                                Copy HTML
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <code>
+                                                {posts.cssCode}
+                                            </code>
+                                            <button className="copy-button" onClick={() => copyToClipboard(posts.cssCode)}>
+                                                Copy CSS
+                                            </button>
+                                        </>
+                                    )
+                                }
+                            </div>
                         </div>
                     </div>
-                }
+                </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default SnipPage;
