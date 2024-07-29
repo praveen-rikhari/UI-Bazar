@@ -51,7 +51,6 @@ const Browse = () => {
             <div className="posts-container">
                 {
                     posts.map((post, index) => {
-                        const uniqueClass = `post-${index}`;
                         return (
                             <div key={post._id} className='post-card'>
                                 <h3>
