@@ -43,7 +43,7 @@ const Create = () => {
                 // Hide success message after 3 seconds
                 setTimeout(() => {
                     setSuccessMessage(false);
-                }, 3000);
+                }, 5000);
             }
         } catch (error) {
             console.error('Error while creating post :', error);
