@@ -36,17 +36,11 @@ const Browse = () => {
                         height: 100vh; /* Full viewport height */
                         background-color: #f0f0f0; /* Background color for better contrast */
                     }
-                    .content-wrapper { /* Wrapper to center content */
-                        max-width: 90%; /* Limit width for better visibility */
-                        padding: 20px; /* Padding for inner content */
-                    }
                     ${cssCode}
                 </style>
             </head>
             <body>
-                <div class="content-wrapper">
                     ${htmlCode}
-                </div>
             </body>
             </html>
         `;
@@ -59,7 +53,7 @@ const Browse = () => {
             <div className="posts-container">
                 {
                     posts.map((post, index) => (
-                        <div key={post._id} className='post-card'>
+                        <div key={post._id} className='posts-card'>
                             <div className="card-header">
                                 <span className="ship-name">{post.name}</span>
                                 <Link href={`/snip-page/${post._id}`} className="get-code-btn">Get Code</Link>
@@ -76,7 +70,7 @@ const Browse = () => {
                                 <span className="user-name">User Name</span>
                                 <div className="footer-right">
                                     <button className="like-btn">Like</button>
-                                    <span className="date-update">Date Update</span>
+                                    <span className="date-update">Date</span>
                                 </div>
                             </div>
                         </div>

@@ -10,7 +10,7 @@
     justify-content: center;
 }
 
-.post-card {
+.posts-card {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -25,7 +25,7 @@
     transition: box-shadow 0.3s ease;
 }
 
-.post-card:hover {
+.posts-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -85,7 +85,7 @@
     font-size: 0.9em;
 }
 
-.date-update {
+.date {
     font-size: 0.8em;
     color: #999;
 }
@@ -99,7 +99,7 @@
 
 /* Media Query for Responsiveness */
 @media (max-width: 600px) {
-    .post-card {
+    .posts-card {
         max-width: 100%; /* Full width on small screens */
     }
 
