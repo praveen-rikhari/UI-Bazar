@@ -11,32 +11,64 @@ const Browse = () => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get('/api/post');
-                console.log(response.data);
-                setPosts(response.data);
+                if (response) {
+                    console.log(response.data);
+                    setPosts(response.data);
+                }
+
             } catch (error) {
                 console.error("Error while fetching posts : ", error);
             }
         }
         fetchPosts();
     }, [])
+
+    const createIframeContent = (htmlCode, cssCode) => {
+        const iframeDocument = `
+                                <html>
+                                <head>
+                                    <style>
+                                        body {
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                            height: 100vh;
+                                            margin: 0;
+                                        }
+                                        ${cssCode}
+                                    </style>
+                                </head>
+                                <body>
+                                    ${htmlCode}
+                                </body>
+                            </html>
+        `;
+        return iframeDocument;
+    };
     return (
         <div className="browse-page">
             <h1>All Snippets</h1>
             <div className="posts-container">
                 {
-                    posts.map((post) => (
-                        <div key={post._id} className='post-card'>
-                            <h3>
-                                {post.name}
-                            </h3>
-                            <p>
-                                {post.description}
-                            </p>
-                            <Link href={`/snip-page/${post._id}`}>go to snip-page</Link>
-                            <div className="code-preview" dangerouslySetInnerHTML={{ __html: post.htmlCode }} />
-                            <style>{post.cssCode}</style>
-                        </div>
-                    ))
+                    posts.map((post, index) => {
+                        const uniqueClass = `post-${index}`;
+                        return (
+                            <div key={post._id} className='post-card'>
+                                <h3>
+                                    {post.name}
+                                </h3>
+
+                                <Link href={`/snip-page/${post._id}`}>go to snip-page</Link>
+
+                                <iframe
+                                    srcDoc={createIframeContent(post.htmlCode, post.cssCode)}
+                                    className="code-preview"
+                                    title={`Post ${index}`}
+                                    sandbox="allow-scripts allow-same-origin"
+                                />
+                            </div>
+                        )
+                    })
                 }
             </div>
         </div>
