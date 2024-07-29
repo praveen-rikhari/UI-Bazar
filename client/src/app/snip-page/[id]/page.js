@@ -44,6 +44,15 @@ const SnipPage = ({ params }) => {
         `;
         return iframeDocument;
     };
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Copied to clipboard!');
+        }, (err) => {
+            console.error('Could not copy text: ', err);
+        });
+    }
+
     return (
         <div className="singlePost-page">
             <div className="post-container">
@@ -62,11 +71,17 @@ const SnipPage = ({ params }) => {
                             <code>
                                 {posts.htmlCode}
                             </code>
+                            <button className="copy-button" onClick={() => copyToClipboard(posts.htmlCode)}>
+                                Copy HTML
+                            </button>
                         </div>
                         <div className='cssCode-box'>
                             <code>
                                 {posts.cssCode}
                             </code>
+                            <button className="copy-button" onClick={() => copyToClipboard(posts.cssCode)}>
+                                Copy CSS
+                            </button>
                         </div>
                     </div>
                 }
