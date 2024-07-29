@@ -12,7 +12,6 @@ const Browse = () => {
             try {
                 const response = await axios.get('/api/post');
                 if (response) {
-                    console.log(response.data);
                     setPosts(response.data);
                 }
 
