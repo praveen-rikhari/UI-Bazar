@@ -12,3 +12,14 @@ export async function GET(req, { params }) {
         return NextResponse.json("Error in getting the post.........");
     }
 }
+
+export async function DELETE(req, { params }) {
+    try {
+        dbConnect();
+        await Post.findByIdAndDelete(params.id);
+        return NextResponse.json("post deleted");
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json("error in deleting")
+    }
+}

@@ -1,12 +1,21 @@
 "use client"
 import { useState, useEffect } from 'react';
+import { useAuth } from "@clerk/nextjs";
 import axios from 'axios';
 import './SnipPage.css';
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
     const [activeTab, setActiveTab] = useState('html');
-
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    const handleDelete = async (postId) => {
+        try {
+            const { data } = await axios.delete(`/api/post/${postId}`);
+            alert(data);
+        } catch (error) {
+            console.log("error in deleting", error);
+        }
+    }
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -58,7 +67,13 @@ const SnipPage = ({ params }) => {
         <div className="singlePost-page">
             <div className="post-container">
                 <div className='post-card'>
-                    <h3>{posts.name}</h3>
+                    <h3>
+                        {posts.name}
+                        <div>
+                            <button>Edit</button>
+                            {posts.userId === userId && <button onClick={() => handleDelete(params.id)}>delete</button>}
+                        </div>
+                    </h3>
                     <div className="content-wrapper">
                         <iframe
                             srcDoc={createIframeContent(posts.htmlCode, posts.cssCode)}
