@@ -8,10 +8,7 @@ const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
     const [activeTab, setActiveTab] = useState("html");
     const { isLoaded, userId, sessionId, getToken } = useAuth();
-<<<<<<< HEAD
     const [copied, setCopied] = useState(false); // Add this line
-=======
->>>>>>> 04e1382a5840096b1a0fe5e7f166e68bd5a77bef
 
     const handleDelete = async (postId) => {
         try {
@@ -20,7 +17,6 @@ const SnipPage = ({ params }) => {
         } catch (error) {
             console.log("error in deleting", error);
         }
-<<<<<<< HEAD
     };
 
     const copyToClipboard = (text) => {
@@ -30,9 +26,6 @@ const SnipPage = ({ params }) => {
             console.error('Could not copy text: ', err);
         });
     };
-=======
-    }
->>>>>>> 04e1382a5840096b1a0fe5e7f166e68bd5a77bef
 
     useEffect(() => {
         const fetchPosts = async () => {
