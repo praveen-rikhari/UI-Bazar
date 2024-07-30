@@ -1,9 +1,35 @@
-const Profile = () => {
-    return (
-        <>
-            <div>Profile View</div>
-        </>
-    )
-}
+"use client";
+import { useUser } from "@clerk/nextjs";
+import { useState } from "react";
+import './Profile.css';
+import FavouritePosts from "@/components/FavouritePosts";
+import AllPosts from "@/components/AllPosts";
 
-export default Profile;
+export default function Profile() {
+    const { isLoaded, isSignedIn, user } = useUser();
+    const [activeTab, setActiveTab] = useState('posts');
+    console.log(user);
+
+    if (!isLoaded || !isSignedIn) {
+        return null;
+    }
+
+    return (
+        <div className="profile-container">
+            <div className="left-panel">
+                <div className="profile-info">
+                    <img src={user.imageUrl} alt="Profile" className="profile-image" />
+                    <h2>{user.fullName}</h2>
+                    <p>{user.emailAddresses[0].emailAddress}</p>
+                </div>
+                <div className="tabs">
+                    <button onClick={() => setActiveTab('posts')}>All Posts</button>
+                    <button onClick={() => setActiveTab('favourites')}>Favourites</button>
+                </div>
+            </div>
+            <div className="right-panel">
+                {activeTab === 'posts' ? <AllPosts /> : <FavouritePosts />}
+            </div>
+        </div>
+    );
+};
