@@ -8,6 +8,7 @@ const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
     const [activeTab, setActiveTab] = useState('html');
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+
     const handleDelete = async (postId) => {
         try {
             const { data } = await axios.delete(`/api/post/${postId}`);
@@ -16,6 +17,7 @@ const SnipPage = ({ params }) => {
             console.log("error in deleting", error);
         }
     }
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -71,7 +73,12 @@ const SnipPage = ({ params }) => {
                         {posts.name}
                         <div>
                             <button>Edit</button>
-                            {posts.userId === userId && <button onClick={() => handleDelete(params.id)}>delete</button>}
+                            {
+                                posts.userId === userId &&
+                                <button onClick={() => handleDelete(params.id)}>
+                                    Delete
+                                </button>
+                            }
                         </div>
                     </h3>
                     <div className="content-wrapper">
