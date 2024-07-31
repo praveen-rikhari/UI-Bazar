@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 import "./SnipPage.css";
+import Link from 'next/link';
+
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
@@ -74,7 +76,9 @@ const SnipPage = ({ params }) => {
                         <span className="post-name">{posts.name}</span>
                         <div className="post-actions">
                             <button>Edit</button>
-                            {posts.userId === userId && <button onClick={() => handleDelete(params.id)}>Delete</button>}
+                            {posts.userId === userId && <Link href="/browse">
+                                <button onClick={() => handleDelete(params.id)}>Delete</button></Link>
+                            }
                         </div>
                     </h3>
                     <div className="content-wrapper">
@@ -116,8 +120,7 @@ const SnipPage = ({ params }) => {
                                     Copy {activeTab.toUpperCase()}
                                 </button>
                                 {copied && <div className="copy-notification">Copied!</div>}{" "}
-                                {/* Notification message */}
-                                <pre>
+                                <pre style={{ overflow: 'auto', maxHeight: '300px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
                                     <code>
                                         {activeTab === "html" ? posts.htmlCode : posts.cssCode}
                                     </code>
