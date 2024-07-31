@@ -4,6 +4,8 @@ import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
 import "./SnipPage.css";
 import Link from 'next/link';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 
 const SnipPage = ({ params }) => {
@@ -121,9 +123,9 @@ const SnipPage = ({ params }) => {
                                 </button>
                                 {copied && <div className="copy-notification">Copied!</div>}{" "}
                                 <pre style={{ overflow: 'auto', maxHeight: '300px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
-                                    <code>
+                                    <SyntaxHighlighter language={activeTab === "html" ? "html" : "css"} style={atomOneDark}>
                                         {activeTab === "html" ? posts.htmlCode : posts.cssCode}
-                                    </code>
+                                    </SyntaxHighlighter>
                                 </pre>
                             </div>
                         </div>
