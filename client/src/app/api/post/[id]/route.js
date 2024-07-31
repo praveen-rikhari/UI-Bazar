@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/dbConnect";
 import Post from "@/models/Post";
+import Comment from "@/models/Comment";
 
 export async function GET(req, { params }) {
     try {
@@ -17,6 +18,7 @@ export async function DELETE(req, { params }) {
     try {
         dbConnect();
         await Post.findByIdAndDelete(params.id);
+        await Comment.findOneAndDelete({ postId: params.id });
         return NextResponse.json("post deleted");
     } catch (error) {
         console.log(error);
