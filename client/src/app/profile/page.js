@@ -6,8 +6,8 @@ import FavouritePosts from "@/components/FavouritePosts";
 import AllPosts from "@/components/AllPosts";
 
 export default function Profile() {
-    const { isLoaded, isSignedIn, user } = useUser();
     const [activeTab, setActiveTab] = useState('posts');
+    const { isLoaded, isSignedIn, user } = useUser();
     console.log(user);
 
     if (!isLoaded || !isSignedIn) {
@@ -28,7 +28,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className="right-panel">
-                {activeTab === 'posts' ? <AllPosts /> : <FavouritePosts />}
+                {activeTab === 'posts' ? <AllPosts userId={user.id} /> : <FavouritePosts />}
             </div>
         </div>
     );

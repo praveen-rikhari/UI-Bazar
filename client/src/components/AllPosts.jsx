@@ -1,8 +1,12 @@
-import React from 'react'
+import PostList from './PostList';
 
-function AllPosts() {
+function AllPosts({userId}) {
+
   return (
-    <div>AllPosts</div>
+    <PostList
+      apiUrl={`/api/post/userPost/${userId}`}
+      headingText={"User's Snippet"}
+    />
   )
 }
 
