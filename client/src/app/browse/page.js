@@ -1,9 +1,12 @@
-import React from 'react'
+import PostList from "@/components/PostList";
 
-function page() {
-  return (
-    <div>Browse</div>
-  )
+const Browse = () => {
+    return (
+        <PostList
+            apiUrl={'/api/post'}
+            headingText={"All Snippets"}
+        />
+    )
 }
 
-export default page
+export default Browse;
