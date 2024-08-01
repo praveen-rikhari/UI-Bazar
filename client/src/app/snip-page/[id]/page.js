@@ -161,13 +161,16 @@ const SnipPage = ({ params }) => {
             </div>
             <div>
                 <h2>Comments:</h2>
-                {/* {
-                    allComments?.map(comment => (
-                        <div key={comment._id}>
-                            <p>{comment.comment}</p>
-                        </div>
-                    ))
-                } */}
+                {Array.isArray(allComments) ?
+                    allComments.map((comm, i) => {
+                        return (
+                            <p key={i}>
+                                {comm.comment}
+                            </p>
+                        )
+                    })
+                    : "no data here yet"
+                }
             </div>
             <Comment postId={posts._id} />
         </div>
