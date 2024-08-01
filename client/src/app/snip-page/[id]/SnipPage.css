@@ -63,7 +63,6 @@
     flex-direction: column;
     height: 400px;
     overflow: hidden; /* Prevent scrollbar here */
-
 }
 
 .tab-buttons {
@@ -91,7 +90,7 @@
 }
 
 .code-content {
-    background-color: #f4f4f4;
+    background-color: #f5f2f0;
     border-radius: 4px;
     padding: 10px;
     flex-grow: 1;

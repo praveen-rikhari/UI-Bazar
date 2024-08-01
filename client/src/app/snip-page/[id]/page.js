@@ -121,9 +121,26 @@ const SnipPage = ({ params }) => {
                                 >
                                     Copy {activeTab.toUpperCase()}
                                 </button>
-                                {copied && <div className="copy-notification">Copied!</div>}{" "}
-                                <pre style={{ overflow: 'auto', maxHeight: '300px', whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
-                                    <SyntaxHighlighter language={activeTab === "html" ? "html" : "css"} style={atomOneDark}>
+
+                                {
+                                    copied &&
+                                    <div className="copy-notification">
+                                        Copied!
+                                    </div>
+                                } {" "}
+
+                                <pre style={{
+                                    overflow: 'auto',
+                                    maxHeight: '300px',
+                                    whiteSpace: 'pre-wrap',
+                                    wordWrap: 'break-word'
+                                }}>
+
+                                    <SyntaxHighlighter
+                                        language={activeTab === "html" ? "html" : "css"}
+                                        style={atomOneDark}
+                                        showLineNumbers
+                                    >
                                         {activeTab === "html" ? posts.htmlCode : posts.cssCode}
                                     </SyntaxHighlighter>
                                 </pre>
