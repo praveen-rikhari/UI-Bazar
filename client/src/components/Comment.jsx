@@ -5,7 +5,6 @@ import { useUser } from "@clerk/nextjs";
 const Comment = ({ postId }) => {
   const [comment, setComment] = useState("");
   const { isLoaded, isSignedIn, user } = useUser();
-  console.log(user);
 
   if (!isLoaded || !isSignedIn) {
     return null;

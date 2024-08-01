@@ -13,7 +13,7 @@ const SnipPage = ({ params }) => {
     const [activeTab, setActiveTab] = useState("html");
     const { isLoaded, userId, sessionId, getToken } = useAuth();
     const [copied, setCopied] = useState(false); // Add this line
-    const [comments, setComments] = useState({});
+    const [allComments, setAllComments] = useState([]);
 
     const handleDelete = async (postId) => {
         try {
@@ -39,7 +39,6 @@ const SnipPage = ({ params }) => {
                 const response = await axios.get(`/api/post/${params.id}`);
                 if (response) {
                     setPosts(response.data);
-                    // console.log(response.data);
                 }
             } catch (error) {
                 console.error("Error while fetching single post : ", error);
@@ -48,7 +47,7 @@ const SnipPage = ({ params }) => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(`/api/comment/${posts._id}`);
-                setComments(response.data);
+                setAllComments(response.data);
             } catch (error) {
                 console.error("Error fetching comments:", error);
             }
@@ -162,11 +161,13 @@ const SnipPage = ({ params }) => {
             </div>
             <div>
                 <h2>Comments:</h2>
-                {
-                        <div>
-                            <p>{comments.comment}</p>
+                {/* {
+                    allComments?.map(comment => (
+                        <div key={comment._id}>
+                            <p>{comment.comment}</p>
                         </div>
-                }
+                    ))
+                } */}
             </div>
             <Comment postId={posts._id} />
         </div>
