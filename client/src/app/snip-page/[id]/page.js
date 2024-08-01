@@ -6,13 +6,14 @@ import "./SnipPage.css";
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
+import Comment from "@/components/Comment";
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
     const [activeTab, setActiveTab] = useState("html");
     const { isLoaded, userId, sessionId, getToken } = useAuth();
     const [copied, setCopied] = useState(false); // Add this line
+    const [comments, setComments] = useState({});
 
     const handleDelete = async (postId) => {
         try {
@@ -31,20 +32,30 @@ const SnipPage = ({ params }) => {
         });
     };
 
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get(`/api/post/${params.id}`);
                 if (response) {
                     setPosts(response.data);
-                    console.log(response.data);
+                    // console.log(response.data);
                 }
             } catch (error) {
                 console.error("Error while fetching single post : ", error);
             }
         };
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`/api/comment/${posts._id}`);
+                setComments(response.data);
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            }
+        };
         fetchPosts();
-    }, [params.id]);
+        fetchComments();
+    }, [params.id, posts._id]);
 
     const createIframeContent = (htmlCode, cssCode) => {
         const iframeDocument = `
@@ -149,6 +160,15 @@ const SnipPage = ({ params }) => {
                     </div>
                 </div>
             </div>
+            <div>
+                <h2>Comments:</h2>
+                {
+                        <div>
+                            <p>{comments.comment}</p>
+                        </div>
+                }
+            </div>
+            <Comment postId={posts._id} />
         </div>
     );
 };

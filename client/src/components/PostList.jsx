@@ -15,7 +15,7 @@ function PostList({ apiUrl, headingText }) {
                     setPosts(response.data);
                 }
             } catch (error) {
-                console.error(`Error while fetching posts from ${apiEndpoint}:`, error);
+                console.error(`Error while fetching posts from ${apiUrl}:`, error);
             }
         };
         fetchPosts();
@@ -50,29 +50,30 @@ function PostList({ apiUrl, headingText }) {
         <div className="browse-page">
             <h1>{headingText}</h1>
             <div className="posts-container">
-                {posts.map((post, index) => (
-                    <div key={post._id} className="posts-card">
-                        <div className="card-header">
-                            <span className="ship-name">{post.name}</span>
-                            <Link href={`/snip-page/${post._id}`} className="get-code-btn">Get Code</Link>
-                        </div>
-                        <div className="card-body">
-                            <iframe
-                                srcDoc={createIframeContent(post.htmlCode, post.cssCode)}
-                                className="code-preview"
-                                title={`Post ${index}`}
-                                sandbox="allow-scripts allow-same-origin allow-forms"
-                            />
-                        </div>
-                        <div className="card-footer">
-                            <span className="user-name">User Name</span>
-                            <div className="footer-right">
-                                <button className="like-btn">Like</button>
-                                <span className="date-update">Date</span>
+                {
+                    posts.map((post, index) => (
+                        <div key={post._id} className="posts-card">
+                            <div className="card-header">
+                                <span className="ship-name">{post.name}</span>
+                                <Link href={`/snip-page/${post._id}`} className="get-code-btn">Get Code</Link>
+                            </div>
+                            <div className="card-body">
+                                <iframe
+                                    srcDoc={createIframeContent(post.htmlCode, post.cssCode)}
+                                    className="code-preview"
+                                    title={`Post ${index}`}
+                                    sandbox="allow-scripts allow-same-origin allow-forms"
+                                />
+                            </div>
+                            <div className="card-footer">
+                                <span className="user-name">User Name</span>
+                                <div className="footer-right">
+                                    <button className="like-btn">Like</button>
+                                    <span className="date-update">Date</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         </div>
     )
