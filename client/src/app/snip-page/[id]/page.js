@@ -19,12 +19,21 @@ const SnipPage = ({ params }) => {
     // user details hook from clerk
     const { isLoaded, isSignedIn, user } = useUser();
 
-    const handleDelete = async (postId) => {
+    const handlePostDelete = async (postId) => {
         try {
             const { data } = await axios.delete(`/api/post/${postId}`);
             alert(data);
         } catch (error) {
-            console.log("error in deleting", error);
+            console.log("error in deleting post", error);
+        }
+    };
+
+    const handleCommentDelete = async (commentId) => {
+        try {
+            const { data } = await axios.delete(`/api/comment/${commentId}`);
+            alert(data);
+        } catch (error) {
+            console.log("error in deleting comment", error);
         }
     };
 
@@ -106,7 +115,7 @@ const SnipPage = ({ params }) => {
                         <div className="post-actions">
                             <button>Edit</button>
                             {posts.userId === userId && <Link href="/browse">
-                                <button onClick={() => handleDelete(params.id)}>Delete</button></Link>
+                                <button onClick={() => handlePostDelete(params.id)}>Delete</button></Link>
                             }
                         </div>
                     </h3>
@@ -193,6 +202,14 @@ const SnipPage = ({ params }) => {
                                                 <span className="username">{user.fullName}</span>
                                                 <p className="post-date">{formatDate(comment.createdAt)}</p>
                                             </div>
+                                            {
+                                                comment.userId === userId &&
+                                                <Link href={`/browse/${comment.postId}`}>
+                                                    <button onClick={() => handleCommentDelete(comment._id)}>
+                                                        Delete
+                                                    </button>
+                                                </Link>
+                                            }
                                         </div>
                                         <p className="comment-content">
                                             {comment.comment}
