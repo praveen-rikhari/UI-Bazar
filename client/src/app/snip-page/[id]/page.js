@@ -195,17 +195,22 @@ const SnipPage = ({ params }) => {
                                 <div className="comments" key={i}>
                                     <div className="comment-container">
                                         <div className="user-details">
-                                            <div className="user-pic">
-                                                <img src={user.imageUrl} alt="User Image" />
+                                            <div className="box-1">
+                                                <div className="user-pic">
+                                                    <img src={user.imageUrl} alt="User Image" />
+                                                </div>
+                                                <div className="user-info">
+                                                    <span className="username">{user.fullName}</span>
+                                                    <p className="post-date">{formatDate(comment.createdAt)}</p>
+                                                </div>
                                             </div>
-                                            <div className="user-info">
-                                                <span className="username">{user.fullName}</span>
-                                                <p className="post-date">{formatDate(comment.createdAt)}</p>
-                                            </div>
+                                            <div className="box-2"></div>
                                             {
                                                 comment.userId === userId &&
                                                 <Link href={`/browse/${comment.postId}`}>
-                                                    <button onClick={() => handleCommentDelete(comment._id)}>
+                                                    <button
+                                                        className="com-del-btn"
+                                                        onClick={() => handleCommentDelete(comment._id)}>
                                                         Delete
                                                     </button>
                                                 </Link>
