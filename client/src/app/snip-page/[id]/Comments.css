@@ -70,3 +70,48 @@ textarea:focus {
     margin-top: 20px;
 }
 
+.comment-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #c4c4c4;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-pic img {
+    flex: 1;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: bold;
+    color: #333;
+}
+
+.post-date {
+    font-size: 12px;
+    color: #777;
+    margin: 0;
+}
+
+.comment-content {
+    font-size: 16px;
+    color: #555;
+}
