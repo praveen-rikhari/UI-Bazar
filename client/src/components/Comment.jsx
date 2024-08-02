@@ -24,18 +24,27 @@ const Comment = ({ postId }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleCommentSubmit}>
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Add your comment..."
-          required
-        />
-
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <>
+      <div className="title">Comments</div>
+      <hr />
+      <div className="form-box">
+        <form className="form-container" onSubmit={handleCommentSubmit}>
+          <div className="user-pic">
+            <img
+              src={user.imageUrl}
+              alt="User Image"
+            />
+          </div>
+          <textarea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder={`Comment as ${user.fullName}...`}
+            required
+          />
+          <button className="comment-btn" type="submit">Post</button>
+        </form>
+      </div>
+    </>
   );
 };
 
