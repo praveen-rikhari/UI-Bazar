@@ -1,19 +1,23 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import axios from "axios";
 import "./SnipPage.css";
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Comment from "@/components/Comment";
+import './Comments.css';
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
     const [activeTab, setActiveTab] = useState("html");
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    const { userId, sessionId, getToken } = useAuth();
     const [copied, setCopied] = useState(false); // Add this line
     const [allComments, setAllComments] = useState([]);
+
+    // user details hook from clerk
+    const { isLoaded, isSignedIn, user } = useUser();
 
     const handleDelete = async (postId) => {
         try {
@@ -159,20 +163,38 @@ const SnipPage = ({ params }) => {
                     </div>
                 </div>
             </div>
-            <div>
-                <h2>Comments:</h2>
-                {Array.isArray(allComments) ?
-                    allComments.map((comm, i) => {
-                        return (
-                            <p key={i}>
-                                {comm.comment}
-                            </p>
-                        )
-                    })
-                    : "no data here yet"
+            <div className="comment-card">
+                <Comment postId={posts._id} />
+
+                {
+                    Array.isArray(allComments) && allComments.length > 0 ?
+                        allComments.map((comment, i) => {
+                            return (
+                                <div className="comments" key={i}>
+                                    <div className="comment-container">
+                                        <div className="user-details">
+                                            <div className="user-pic">
+                                                <img src={user.imageUrl} alt="User Image" />
+                                            </div>
+                                            <div className="user-info">
+                                                <span className="username">{user.fullName}</span>
+                                                <p className="post-date">{formatDate(comment.createdAt)}</p>
+                                            </div>
+                                        </div>
+                                        <p className="comment-content">
+                                            {comment.comment}
+                                        </p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        :
+                        <h2>
+                            Be the first to leave a comment!
+                        </h2>
                 }
+
             </div>
-            <Comment postId={posts._id} />
         </div>
     );
 };
