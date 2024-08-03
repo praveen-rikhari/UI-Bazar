@@ -2,6 +2,7 @@ import mongoose, { model, models, Schema } from 'mongoose';
 
 const postSchema = new Schema({
     userId: {type: String, required: true},
+    userFullName: String,
     name: { type: String, required: true },
     description: { type: String },
     category: { type: String, required: true },

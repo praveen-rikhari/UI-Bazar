@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import CodeEditor from '@/components/CodeEditor';
 import "./create.css"
-import { useAuth } from '@clerk/nextjs';
+import { useUser } from '@clerk/nextjs';
 import axios from 'axios';
 
 const Create = () => {
@@ -13,7 +13,8 @@ const Create = () => {
     const [cssCode, setCssCode] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
-    const { isLoaded, userId, sessionId, getToken } = useAuth();
+    // const { isLoaded, userId, sessionId, getToken } = useAuth();
+    const { user } = useUser()
     const [errors, setErrors] = useState({});
 
 
@@ -35,7 +36,8 @@ const Create = () => {
         }
 
         const postData = {
-            userId: userId,
+            userId: user.id,
+            userFullName: user.fullName,
             name,
             description,
             category,
@@ -82,7 +84,7 @@ const Create = () => {
                     <div>
                         <label>Snippet Name:</label>
                         <input
-                         maxlength="20"
+                            maxlength="20"
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
