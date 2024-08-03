@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import "./PostList.css";
+import formatDateTime from '@/formatDateTime';
 
 function PostList({ apiUrl, headingText }) {
     const [posts, setPosts] = useState([]);
@@ -69,7 +70,9 @@ function PostList({ apiUrl, headingText }) {
                                 <span className="user-name">User Name</span>
                                 <div className="footer-right">
                                     <button className="like-btn">Like</button>
-                                    <span className="date-update">Date</span>
+                                    <span className="date-update">
+                                        {formatDateTime(post.createdAt)}
+                                    </span>
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Comment from "@/components/Comment";
 import './Comments.css';
+import formatDateTime from "@/formatDateTime";
 
 const SnipPage = ({ params }) => {
     const [posts, setPosts] = useState({});
@@ -80,18 +81,6 @@ const SnipPage = ({ params }) => {
         `;
         return iframeDocument;
     };
-
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-        });
-    }
 
 
     return (
@@ -174,7 +163,7 @@ const SnipPage = ({ params }) => {
                 </div>
             </div>
             <div className="comment-card">
-                <Comment postId={posts._id} addComment={addComment} deleteComment={deleteComment}/>
+                <Comment postId={posts._id} addComment={addComment} deleteComment={deleteComment} />
 
                 {
                     Array.isArray(allComments) && allComments.length > 0 ?
@@ -189,7 +178,9 @@ const SnipPage = ({ params }) => {
                                                 </div>
                                                 <div className="user-info">
                                                     <span className="username">{comment.fullName}</span>
-                                                    <p className="post-date">{formatDate(comment.createdAt)}</p>
+                                                    <p className="post-date">
+                                                        {formatDateTime(comment.createdAt)}
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div className="box-2"></div>
