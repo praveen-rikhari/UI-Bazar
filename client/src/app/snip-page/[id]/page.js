@@ -88,7 +88,12 @@ const SnipPage = ({ params }) => {
             <div className="post-container">
                 <div className="post-card">
                     <h3 className="post-header">
-                        <span className="post-name">{posts.name}</span>
+                        <span className="post-name">
+                            {posts.name}
+                            <span className="user-name">
+                                By {posts.userFullName}
+                            </span>
+                        </span>
                         <div className="post-actions">
                             <button>Edit</button>
                             {posts.userId === userId && <Link href="/browse">
@@ -161,6 +166,7 @@ const SnipPage = ({ params }) => {
                         </div>
                     </div>
                 </div>
+
             </div>
             <div className="comment-card">
                 <Comment postId={posts._id} addComment={addComment} deleteComment={deleteComment} />
