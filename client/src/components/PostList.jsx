@@ -67,7 +67,7 @@ function PostList({ apiUrl, headingText }) {
                                 />
                             </div>
                             <div className="card-footer">
-                                <span className="user-name">User Name</span>
+                                <span className="user-name">{post.userFullName}</span>
                                 <div className="footer-right">
                                     <button className="like-btn">Like</button>
                                     <span className="date-update">
