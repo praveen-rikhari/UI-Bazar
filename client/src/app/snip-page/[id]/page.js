@@ -18,23 +18,11 @@ const SnipPage = ({ params }) => {
 
     // user details hook from clerk
     const { isLoaded, isSignedIn, user } = useUser();
-
-    const handlePostDelete = async (postId) => {
-        try {
-            const { data } = await axios.delete(`/api/post/${postId}`);
-            alert(data);
-        } catch (error) {
-            console.log("error in deleting post", error);
-        }
+    const addComment = (newComment) => {
+        setAllComments((prevComments) => [...prevComments, newComment]);
     };
-
-    const handleCommentDelete = async (commentId) => {
-        try {
-            const { data } = await axios.delete(`/api/comment/${commentId}`);
-            alert(data);
-        } catch (error) {
-            console.log("error in deleting comment", error);
-        }
+    const deleteComment = (commentId) => {
+        setAllComments((prevComments) => prevComments.filter(comment => comment._id !== commentId));
     };
 
     const copyToClipboard = (text) => {
@@ -186,7 +174,7 @@ const SnipPage = ({ params }) => {
                 </div>
             </div>
             <div className="comment-card">
-                <Comment postId={posts._id} />
+                <Comment postId={posts._id} addComment={addComment} deleteComment={deleteComment}/>
 
                 {
                     Array.isArray(allComments) && allComments.length > 0 ?
@@ -207,13 +195,11 @@ const SnipPage = ({ params }) => {
                                             <div className="box-2"></div>
                                             {
                                                 comment.userId === userId &&
-                                                <Link href={`/browse/${comment.postId}`}>
-                                                    <button
-                                                        className="com-del-btn"
-                                                        onClick={() => handleCommentDelete(comment._id)}>
-                                                        Delete
-                                                    </button>
-                                                </Link>
+                                                <button
+                                                    className="com-del-btn"
+                                                    onClick={() => deleteComment(comment._id)}>
+                                                    Delete
+                                                </button>
                                             }
                                         </div>
                                         <p className="comment-content">

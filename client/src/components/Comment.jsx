@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 
-const Comment = ({ postId }) => {
+const Comment = ({ postId , addComment , deleteComment}) => {
   const [comment, setComment] = useState("");
   const { isLoaded, isSignedIn, user } = useUser();
 
@@ -22,6 +22,7 @@ const Comment = ({ postId }) => {
       });
       if (response) {
         console.log(response.data);
+        addComment(response.data); // Call the addComment function with the new comment
         setComment("")
       }
     } catch (error) {
