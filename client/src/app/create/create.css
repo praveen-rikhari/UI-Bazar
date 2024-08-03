@@ -1,45 +1,86 @@
 .create-page {
-    padding: 20px;
+    padding: 40px;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .create-page h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.snippet-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 35px;
 }
 
 .snippet-form form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .snippet-form label {
     font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .snippet-form input,
 .snippet-form textarea,
 .snippet-form select {
-    width: 100%;
-    padding: 8px;
+    width: 100%; /* Ensures full width */
+    padding: 10px;
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding is included in total width */
+    transition: border-color 0.3s;
+}
+
+.snippet-form input:focus,
+.snippet-form textarea:focus,
+.snippet-form select:focus {
+    border-color: #007bff; /* Change to your accent color */
+    outline: none;
 }
 
 .snippet-form textarea {
     height: 100px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    margin-bottom: 20px;
 }
 
 .snippet-form button {
-    padding: 10px 20px;
+    padding: 12px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 .snippet-form button:hover {

@@ -22,7 +22,8 @@ const CodeEditor = () => {
         cursor: 'pointer',
         background: '#0070f3',
         color: '#fff',
-        margin: '0 0.5rem'
+        margin: '0 0.5rem',
+        transition: 'background 0.3s, color 0.3s', // Add transition for smoother interaction
     };
 
     const inactive = {

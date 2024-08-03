@@ -1,6 +1,7 @@
 .container {
     display: flex;
-    height: 600px;
+    height:600px;
+    gap: 1rem;
   }
   
   .editorSection {
@@ -8,6 +9,9 @@
     height: 100%;
     padding: 1rem;
     border-right: 1px solid #ccc;
+    border-radius: 4px; /* Round corners for a cleaner look */
+    background-color: #f9f9f9; /* Light background for visibility */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
   
   .buttons {
@@ -37,6 +41,9 @@
     width: 50%;
     height: 100%;
     padding: 1rem;
+    border-radius: 4px; /* Round corners for a cleaner look */
+    background-color: #fff; /* White background for the preview */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
   }
   
   .result {
@@ -44,4 +51,3 @@
     height: 100%;
     border: none;
   }
-  
