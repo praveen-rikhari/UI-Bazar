@@ -197,10 +197,10 @@ const SnipPage = ({ params }) => {
                                         <div className="user-details">
                                             <div className="box-1">
                                                 <div className="user-pic">
-                                                    <img src={user.imageUrl} alt="User Image" />
+                                                    <img src={comment.imgUrl} alt="User Image" />
                                                 </div>
                                                 <div className="user-info">
-                                                    <span className="username">{user.fullName}</span>
+                                                    <span className="username">{comment.fullName}</span>
                                                     <p className="post-date">{formatDate(comment.createdAt)}</p>
                                                 </div>
                                             </div>

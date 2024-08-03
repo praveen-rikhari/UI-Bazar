@@ -13,7 +13,13 @@ const Comment = ({ postId }) => {
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/comment/', { userId: user.id, postId, comment });
+      const response = await axios.post('/api/comment/', {
+        userId: user.id,
+        postId,
+        comment,
+        imgUrl: user.imageUrl,
+        fullName: user.fullName,
+      });
       if (response) {
         console.log(response.data);
         setComment("")
