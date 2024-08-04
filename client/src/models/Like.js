@@ -6,3 +6,5 @@ const likeSchema = new mongoose.Schema({
 });
 
 const Like = models.Like || model("Like", likeSchema);
+
+export default Like;
