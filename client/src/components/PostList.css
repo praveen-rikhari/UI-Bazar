@@ -114,8 +114,9 @@
 
 .filter-container {
     display: flex;
-    justify-content: start;
-    margin-bottom: 20px;
+    justify-content: space-between; /* Space between category and search bar */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 20px; /* Space below the filter container */
 }
 
 .filter-select {
@@ -123,5 +124,19 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
+    width: 150px; /* Set a fixed width for the dropdown */
+    margin-right: 10px; /* Space between select and search */
+}
+
+.search-container {
+    display: flex;
+    align-items: center; /* Center the search input */
+}
+
+.search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px; /* Set a fixed width for the search input */
 }

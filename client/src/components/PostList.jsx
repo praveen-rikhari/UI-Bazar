@@ -9,6 +9,7 @@ function PostList({ apiUrl, headingText }) {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]); // Add this line
     const [selectedCategory, setSelectedCategory] = useState(''); // Add this line
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         async function fetchPosts() {
@@ -32,6 +33,21 @@ function PostList({ apiUrl, headingText }) {
             setFilteredPosts(posts.filter(post => post.category === selectedCategory));
         }
     }, [selectedCategory, posts]); // Add this useEffect
+
+    useEffect(() => {
+        const normalizedSearchQuery = searchQuery.replace(/\s+/g, '').toLowerCase(); // Normalize search query by removing spaces
+    
+        const filteredPosts = posts.filter(post => {
+            const matchesCategory = selectedCategory ? post.category === selectedCategory : true;
+            const matchesName = post.name.replace(/\s+/g, '').toLowerCase().includes(normalizedSearchQuery); // Normalize post name
+            const matchesUserName = post.userFullName ? post.userFullName.replace(/\s+/g, '').toLowerCase().includes(normalizedSearchQuery) : false; // Normalize user name
+            
+            return matchesCategory && (matchesName || matchesUserName); // Return true if matches
+        });
+    
+        setFilteredPosts(filteredPosts); // Update filteredPosts state
+    }, [selectedCategory, searchQuery, posts]); // Updated dependencies
+    
 
     const createIframeContent = (htmlCode, cssCode) => {
         const iframeDocument = `
@@ -77,6 +93,15 @@ function PostList({ apiUrl, headingText }) {
                 <option value="Forms">Forms</option>
                 <option value="Other">Other</option>
             </select>
+            <div className="search-container">
+                <input
+                    type="text"
+                    placeholder="Search by name"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="search-input"
+                />
+            </div>
         </div>
             <div className="posts-container">
                 {
