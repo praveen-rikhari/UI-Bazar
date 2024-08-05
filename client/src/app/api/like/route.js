@@ -9,12 +9,12 @@ export async function POST(req) {
         const { userId, postId } = await req.json();
         const existingLike = await Like.findOne({ userId, postId });
         if (existingLike) {
-            Like.findByIdAndDelete(existingLike._id);
-            Post.findByIdAndUpdate(postId, { $inc: { likesCount: -1 } });
+            await Like.findByIdAndDelete(existingLike._id);
+            await Post.findByIdAndUpdate(postId, { $inc: { likesCount: -1 } });
         } else {
             const newLike = new Like({ userId, postId });
             await newLike.save();
-            Post.findByIdAndUpdate(postId, { $inc: { likesCount: 1 } });
+            await Post.findByIdAndUpdate(postId, { $inc: { likesCount: 1 } });
         }
 
         return NextResponse.json("like updated");
