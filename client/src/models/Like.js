@@ -1,7 +1,7 @@
 import mongoose, { model, models, Schema } from 'mongoose';
 
 const likeSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: String,
     postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
 });
 
