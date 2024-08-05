@@ -5,12 +5,15 @@ import Link from 'next/link';
 import "./PostList.css";
 import formatDateTime from '@/formatDateTime';
 import Like from './Like';
+import { useUser } from '@clerk/nextjs';
 
 function PostList({ apiUrl, headingText }) {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]); // Add this line
     const [selectedCategory, setSelectedCategory] = useState(''); // Add this line
     const [searchQuery, setSearchQuery] = useState('');
+
+    const { isLoaded, isSignedIn, user } = useUser();
 
     useEffect(() => {
         async function fetchPosts() {
@@ -126,7 +129,7 @@ function PostList({ apiUrl, headingText }) {
                                     {/* <button className="like-btn">Like</button> */}
                                     <Like
                                         postId={post._id}
-                                        userId={post.userId}
+                                        userId={user.id}
                                         currentLikesCount={post.likesCount}
 
                                     />
