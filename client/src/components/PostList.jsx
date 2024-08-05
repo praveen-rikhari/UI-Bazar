@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import "./PostList.css";
 import formatDateTime from '@/formatDateTime';
+import Like from './Like';
 
 function PostList({ apiUrl, headingText }) {
     const [posts, setPosts] = useState([]);
@@ -36,18 +37,18 @@ function PostList({ apiUrl, headingText }) {
 
     useEffect(() => {
         const normalizedSearchQuery = searchQuery.replace(/\s+/g, '').toLowerCase(); // Normalize search query by removing spaces
-    
+
         const filteredPosts = posts.filter(post => {
             const matchesCategory = selectedCategory ? post.category === selectedCategory : true;
             const matchesName = post.name.replace(/\s+/g, '').toLowerCase().includes(normalizedSearchQuery); // Normalize post name
             const matchesUserName = post.userFullName ? post.userFullName.replace(/\s+/g, '').toLowerCase().includes(normalizedSearchQuery) : false; // Normalize user name
-            
+
             return matchesCategory && (matchesName || matchesUserName); // Return true if matches
         });
-    
+
         setFilteredPosts(filteredPosts); // Update filteredPosts state
     }, [selectedCategory, searchQuery, posts]); // Updated dependencies
-    
+
 
     const createIframeContent = (htmlCode, cssCode) => {
         const iframeDocument = `
@@ -78,31 +79,31 @@ function PostList({ apiUrl, headingText }) {
         <div className="browse-page">
             <h1>{headingText}</h1>
             <div className="filter-container">
-            <select
-                className="filter-select"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-                <option value="">All Categories</option>
-                <option value="Button">Button</option>
-                <option value="CheckBox">CheckBox</option>
-                <option value="Toggle Switches">Toggle Switches</option>
-                <option value="Card">Card</option>
-                <option value="Input">Input</option>
-                <option value="Loader">Loader</option>
-                <option value="Forms">Forms</option>
-                <option value="Other">Other</option>
-            </select>
-            <div className="search-container">
-                <input
-                    type="text"
-                    placeholder="Search by name"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="search-input"
-                />
+                <select
+                    className="filter-select"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                >
+                    <option value="">All Categories</option>
+                    <option value="Button">Button</option>
+                    <option value="CheckBox">CheckBox</option>
+                    <option value="Toggle Switches">Toggle Switches</option>
+                    <option value="Card">Card</option>
+                    <option value="Input">Input</option>
+                    <option value="Loader">Loader</option>
+                    <option value="Forms">Forms</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div className="search-container">
+                    <input
+                        type="text"
+                        placeholder="Search by name"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="search-input"
+                    />
+                </div>
             </div>
-        </div>
             <div className="posts-container">
                 {
                     filteredPosts.map((post, index) => ( // Change posts to filteredPosts
@@ -122,7 +123,13 @@ function PostList({ apiUrl, headingText }) {
                             <div className="card-footer">
                                 <span className="user-name">{post.userFullName}</span>
                                 <div className="footer-right">
-                                    <button className="like-btn">Like</button>
+                                    {/* <button className="like-btn">Like</button> */}
+                                    <Like
+                                        postId={post._id}
+                                        userId={post.userId}
+                                        currentLikesCount={post.likesCount}
+
+                                    />
                                     <span className="date-update">
                                         {formatDateTime(post.createdAt)}
                                     </span>
