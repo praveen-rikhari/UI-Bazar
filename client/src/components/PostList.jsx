@@ -7,6 +7,8 @@ import formatDateTime from '@/formatDateTime';
 
 function PostList({ apiUrl, headingText }) {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]); // Add this line
+    const [selectedCategory, setSelectedCategory] = useState(''); // Add this line
 
     useEffect(() => {
         async function fetchPosts() {
@@ -14,13 +16,22 @@ function PostList({ apiUrl, headingText }) {
                 const response = await axios.get(apiUrl);
                 if (response) {
                     setPosts(response.data);
+                    setFilteredPosts(response.data); // Initially, show all posts
                 }
             } catch (error) {
                 console.error(`Error while fetching posts from ${apiUrl}:`, error);
             }
         };
         fetchPosts();
-    }, [apiUrl])
+    }, [apiUrl]);
+
+    useEffect(() => {
+        if (selectedCategory === '') {
+            setFilteredPosts(posts);
+        } else {
+            setFilteredPosts(posts.filter(post => post.category === selectedCategory));
+        }
+    }, [selectedCategory, posts]); // Add this useEffect
 
     const createIframeContent = (htmlCode, cssCode) => {
         const iframeDocument = `
@@ -50,9 +61,26 @@ function PostList({ apiUrl, headingText }) {
     return (
         <div className="browse-page">
             <h1>{headingText}</h1>
+            <div className="filter-container">
+            <select
+                className="filter-select"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+                <option value="">All Categories</option>
+                <option value="Button">Button</option>
+                <option value="CheckBox">CheckBox</option>
+                <option value="Toggle Switches">Toggle Switches</option>
+                <option value="Card">Card</option>
+                <option value="Input">Input</option>
+                <option value="Loader">Loader</option>
+                <option value="Forms">Forms</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
             <div className="posts-container">
                 {
-                    posts.map((post, index) => (
+                    filteredPosts.map((post, index) => ( // Change posts to filteredPosts
                         <div key={post._id} className="posts-card">
                             <div className="card-header">
                                 <span className="ship-name">{post.name}</span>
@@ -79,7 +107,7 @@ function PostList({ apiUrl, headingText }) {
                     ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default PostList;
