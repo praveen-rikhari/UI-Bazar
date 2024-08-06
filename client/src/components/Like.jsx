@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
+import './Like.css';
+import { FaRegHeart, FaHeart } from "react-icons/fa6";
 
 function Like({ postId, userId, currentLikesCount }) {
     const [likesCount, setLikesCount] = useState(currentLikesCount);
@@ -22,8 +24,16 @@ function Like({ postId, userId, currentLikesCount }) {
 
     return (
         <>
-            <button onClick={handleLike}>
-                Likes: {likesCount}
+            <button
+                className={
+                    `like-button ${isLiked ? 'liked' : ''}`
+                }
+                onClick={handleLike}
+            >
+                {
+                    isLiked ? <FaHeart /> : <FaRegHeart />
+                }
+                {likesCount}
             </button>
         </>
     )
