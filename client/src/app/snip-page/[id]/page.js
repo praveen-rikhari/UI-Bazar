@@ -19,6 +19,15 @@ const SnipPage = ({ params }) => {
 
     // user details hook from clerk
     const { isLoaded, isSignedIn, user } = useUser();
+
+    const handlePostDelete = async (postId) => {
+        try {
+            await axios.delete(`/api/post/${postId}`);
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
+    
     const addComment = (newComment) => {
         setAllComments((prevComments) => [...prevComments, newComment]);
     };
