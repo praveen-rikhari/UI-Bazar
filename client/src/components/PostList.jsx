@@ -113,7 +113,11 @@ function PostList({ apiUrl, headingText }) {
                         <div key={post._id} className="posts-card">
                             <div className="card-header">
                                 <span className="ship-name">{post.name}</span>
-                                <Link href={`/snip-page/${post._id}`} className="get-code-btn">Get Code</Link>
+                                <Link
+                                    href={`/snip-page/${post._id}`}
+                                    className="get-code-btn">
+                                    Get Code
+                                </Link>
                             </div>
                             <div className="card-body">
                                 <iframe
@@ -126,13 +130,14 @@ function PostList({ apiUrl, headingText }) {
                             <div className="card-footer">
                                 <span className="user-name">{post.userFullName}</span>
                                 <div className="footer-right">
-                                    {/* <button className="like-btn">Like</button> */}
+
                                     <Like
                                         postId={post._id}
                                         userId={user.id}
                                         currentLikesCount={post.likesCount}
 
                                     />
+
                                     <span className="date-update">
                                         {formatDateTime(post.createdAt)}
                                     </span>

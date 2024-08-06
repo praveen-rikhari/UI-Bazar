@@ -19,12 +19,6 @@ function Like({ postId, userId, currentLikesCount }) {
         }
     }
 
-    //checking if user liked the post or not
-    // useEffect(() => {
-    //     async function fetchLikes() {
-    //         const response = await axios.get('/api/like', { postId, userId })
-    //     }
-    // })
 
     return (
         <>
