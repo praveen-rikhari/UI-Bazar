@@ -20,20 +20,6 @@ const SnipPage = ({ params }) => {
     // user details hook from clerk
     const { isLoaded, isSignedIn, user } = useUser();
 
-    const handlePostDelete = async (postId) => {
-        try {
-            await axios.delete(`/api/post/${postId}`);
-        } catch (error) {
-            console.error('Error deleting post:', error);
-        }
-    };
-    
-    const addComment = (newComment) => {
-        setAllComments((prevComments) => [...prevComments, newComment]);
-    };
-    const deleteComment = (commentId) => {
-        setAllComments((prevComments) => prevComments.filter(comment => comment._id !== commentId));
-    };
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text).then(() => {
@@ -43,6 +29,30 @@ const SnipPage = ({ params }) => {
         });
     };
 
+    // function to delete post
+    const handlePostDelete = async (postId) => {
+        try {
+            await axios.delete(`/api/post/${postId}`);
+        } catch (error) {
+            console.error('Error deleting post:', error);
+        }
+    };
+
+    // fucntion to add comment
+    const addComment = (newComment) => {
+        setAllComments((prevComments) => [...prevComments, newComment]);
+    };
+
+    // function to delete comment
+    const handleCommentDelete = async (commentId) => {
+        setAllComments((prevComments) => prevComments.filter(comment => comment._id !== commentId));
+        try {
+            const { data } = await axios.delete(`/api/comment/${commentId}`);
+            alert(data);
+        } catch (error) {
+            console.log("error in deleting comment", error);
+        }
+    };
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -178,7 +188,7 @@ const SnipPage = ({ params }) => {
 
             </div>
             <div className="comment-card">
-                <Comment postId={posts._id} addComment={addComment} deleteComment={deleteComment} />
+                <Comment postId={posts._id} addComment={addComment} />
 
                 {
                     Array.isArray(allComments) && allComments.length > 0 ?
@@ -203,7 +213,7 @@ const SnipPage = ({ params }) => {
                                                 comment.userId === userId &&
                                                 <button
                                                     className="com-del-btn"
-                                                    onClick={() => deleteComment(comment._id)}>
+                                                    onClick={() => handleCommentDelete(comment._id)}>
                                                     Delete
                                                 </button>
                                             }
