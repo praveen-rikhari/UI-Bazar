@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 
-const Comment = ({ postId , addComment , deleteComment}) => {
+const Comment = ({ postId , addComment}) => {
   const [comment, setComment] = useState("");
   const { isLoaded, isSignedIn, user } = useUser();
 
