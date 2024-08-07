@@ -133,7 +133,7 @@ function PostList({ apiUrl, headingText }) {
 
                                     <Like
                                         postId={post._id}
-                                        userId={user.id}
+                                        userId={user?.id}
                                         currentLikesCount={post.likesCount}
 
                                     />
