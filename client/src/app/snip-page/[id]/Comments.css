@@ -33,6 +33,7 @@ hr {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    position: relative;
 }
 
 textarea {
@@ -64,6 +65,27 @@ textarea:focus {
 
 .comment-btn:hover {
     background-color: #0056b3;
+}
+
+.emoji-picker-container {
+    position: relative;
+}
+
+.emoji-btn {
+    background: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    padding: 3px 4px;
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.emoji-picker {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .comments {
