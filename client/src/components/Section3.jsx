@@ -5,7 +5,11 @@ import "./Section3.css";
 export default function Section3() {
     return (
         <div className="s3-container">
-            
+
+            <div className="blurryGradient"></div>
+            <div className="blurryGradient"></div>
+            <div className="blurryGradient"></div>
+
             <section className="s3">
                 <div className="imageContainer">
                     <Image
@@ -34,7 +38,9 @@ export default function Section3() {
                                 "No Ads"
                             ].map((text, index) => (
                                 <div key={index} className="list">
-                                    <FaHandPointRight /> {text}
+                                    <FaHandPointRight
+                                        size={25}
+                                    /> {text}
                                 </div>
                             ))
                         }

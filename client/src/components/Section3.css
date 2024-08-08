@@ -88,3 +88,33 @@ p {
     margin-right: 20px;
     color: #ffcc00;
 }
+
+.blurryGradient {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(248, 51, 166, 0.4), transparent);
+    border-radius: 50%;
+    filter: blur(150px);
+    animation: move 15s infinite alternate ease-in-out;
+}
+
+.blurryGradient:nth-child(1) {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blurryGradient:nth-child(2) {
+    top: 50%;
+    right: 30%;
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.4), transparent);
+    animation-delay: 2s;
+}
+
+.blurryGradient:nth-child(3) {
+    bottom: 10%;
+    left: 30%;
+    background: radial-gradient(circle, rgba(0, 255, 150, 0.4), transparent);
+    animation-delay: 4s;
+}
