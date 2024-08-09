@@ -12,6 +12,7 @@ function PostList({ apiUrl, headingText }) {
     const [filteredPosts, setFilteredPosts] = useState([]); // Add this line
     const [selectedCategory, setSelectedCategory] = useState(''); // Add this line
     const [searchQuery, setSearchQuery] = useState('');
+    const [message, setMessage] = useState(false);
 
     const { isLoaded, isSignedIn, user } = useUser();
 
@@ -29,6 +30,26 @@ function PostList({ apiUrl, headingText }) {
         };
         fetchPosts();
     }, [apiUrl]);
+
+    // function to save fav post
+    const handleSaveToFav = async (postId) => {
+        try {
+            const response = await axios.post('/api/fav', {
+                userId: user.id,
+                postId
+            });
+
+            if (response) {
+                console.log("Post saved Successfully", response);
+                setMessage(true);
+                setTimeout(() => {
+                    setMessage(false);
+                }, 3000);
+            }
+        } catch (error) {
+            console.error("Error while saving Post", response);
+        }
+    }
 
     useEffect(() => {
         if (selectedCategory === '') {
@@ -107,9 +128,18 @@ function PostList({ apiUrl, headingText }) {
                     />
                 </div>
             </div>
+
+            {
+                message && (
+                    <div className="success-message">
+                        Snippet saved Successfully! View it on your profile page.
+                    </div>
+                )
+            }
+
             <div className="posts-container">
                 {
-                    filteredPosts.map((post, index) => ( // Change posts to filteredPosts
+                    filteredPosts.map((post, index) => (
                         <div key={post._id} className="posts-card">
                             <div className="card-header">
                                 <span className="ship-name">{post.name}</span>
@@ -143,6 +173,10 @@ function PostList({ apiUrl, headingText }) {
                                     </span>
                                 </div>
                             </div>
+                            <br />
+                            <button onClick={() => handleSaveToFav(post._id)}>
+                                Save to Fav
+                            </button>
                         </div>
                     ))}
             </div>
