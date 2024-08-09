@@ -28,7 +28,7 @@ export default function Profile() {
                 </div>
             </div>
             <div className="right-panel">
-                {activeTab === 'posts' ? <AllPosts userId={user.id} /> : <FavouritePosts />}
+                {activeTab === 'posts' ? <AllPosts userId={user.id} /> : <FavouritePosts userId={user.id}/>}
             </div>
         </div>
     );
