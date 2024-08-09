@@ -1,9 +1,12 @@
-import React from 'react'
+import PostList from './PostList';
 
-function FavouritePosts() {
+function FavouritePosts(userId) {
   return (
-    <div>FavouritePosts</div>
+    <PostList
+      apiUrl={`/api/fav/${userId}`}
+      headingText={"Your favorite posts"}
+    />
   )
 }
 
-export default FavouritePosts
+export default FavouritePosts;
