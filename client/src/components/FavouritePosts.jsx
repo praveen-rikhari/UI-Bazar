@@ -1,6 +1,6 @@
 import PostList from './PostList';
 
-function FavouritePosts(userId) {
+function FavouritePosts({userId}) {
   return (
     <PostList
       apiUrl={`/api/fav/${userId}`}

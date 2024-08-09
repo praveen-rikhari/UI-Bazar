@@ -16,13 +16,40 @@ function PostList({ apiUrl, headingText }) {
 
     const { isLoaded, isSignedIn, user } = useUser();
 
+    // Normalization function
+    function normalizeResponseData(data) {
+        return data.map(item => {
+            // Check if the post data is wrapped in a "postId" property
+            if (item.postId) {
+                return {
+                    _id: item.postId._id,
+                    userId: item.postId.userId,
+                    userFullName: item.postId.userFullName,
+                    name: item.postId.name,
+                    description: item.postId.description,
+                    category: item.postId.category,
+                    htmlCode: item.postId.htmlCode,
+                    cssCode: item.postId.cssCode,
+                    likesCount: item.postId.likesCount,
+                    createdAt: item.postId.createdAt,
+                    updatedAt: item.postId.updatedAt,
+                    __v: item.postId.__v
+                };
+            } else {
+                // Already in the desired format
+                return item;
+            }
+        });
+    }
+
     useEffect(() => {
         async function fetchPosts() {
             try {
                 const response = await axios.get(apiUrl);
                 if (response) {
-                    setPosts(response.data);
-                    setFilteredPosts(response.data); // Initially, show all posts
+                    const normalizedData = normalizeResponseData(response.data);
+                    setPosts(normalizedData);
+                    setFilteredPosts(normalizedData); // Initially, show all posts
                 }
             } catch (error) {
                 console.error(`Error while fetching posts from ${apiUrl}:`, error);
@@ -30,6 +57,7 @@ function PostList({ apiUrl, headingText }) {
         };
         fetchPosts();
     }, [apiUrl]);
+
 
     // function to save fav post
     const handleSaveToFav = async (postId) => {
