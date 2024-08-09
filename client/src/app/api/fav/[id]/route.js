@@ -2,15 +2,15 @@ import dbConnect from "@/dbConnect";
 import Fav from "@/models/Fav";
 import { NextResponse } from "next/server";
 
-// '/api/fav/${postId}'
-export async function GET({ params }) {
+// '/api/fav/${userId}'
+export async function GET(req, { params }) {
     try {
         dbConnect();
-        const allFavs = await Fav.find({ postId: params.id });
+        const allFavs = await Fav.find({ userId: params.id }, { postId: true , _id: false}).populate('postId');
         return NextResponse.json(allFavs);
     } catch (error) {
         console.log(error);
-        return NextResponse.json("error in fetching favs")
+        return NextResponse.json("error in fetching favs");
     }
 }
 
