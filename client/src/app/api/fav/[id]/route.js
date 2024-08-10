@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(req, { params }) {
     try {
         dbConnect();
-        const allFavs = await Fav.find({ userId: params.id }, { postId: true , _id: false}).populate('postId');
+        const allFavs = await Fav.find({ userId: params.id }, { postId: true}).populate('postId');
         return NextResponse.json(allFavs);
     } catch (error) {
         console.log(error);
