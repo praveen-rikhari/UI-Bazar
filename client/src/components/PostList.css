@@ -36,6 +36,12 @@
     align-items: center;
 }
 
+.card-footer {
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
 .card-header .ship-name {
     font-size: 1.2em;
     font-weight: bold;
@@ -58,20 +64,22 @@
     justify-content: center;
     align-items: center;
     height: 200px;
-    /* Adjusted height for better visibility */
     margin: 10px 0;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     background-color: #f0f0f0;
-    /* Ensures visibility of content */
     overflow: hidden;
-    /* Prevents overflow */
 }
 
-.card-footer .user-name {
-    font-size: 0.9em;
+.card-footer,
+.posts-card .user-name {
+    font-size: 1em;
     color: #666;
 }
+.posts-card .user-name{
+    text-align: right;
+}
+
 
 .footer-right {
     display: flex;
@@ -114,9 +122,12 @@
 
 .filter-container {
     display: flex;
-    justify-content: space-between; /* Space between category and search bar */
-    align-items: center; /* Center items vertically */
-    margin-bottom: 20px; /* Space below the filter container */
+    justify-content: space-between;
+    /* Space between category and search bar */
+    align-items: center;
+    /* Center items vertically */
+    margin-bottom: 20px;
+    /* Space below the filter container */
 }
 
 .filter-select {
@@ -124,13 +135,16 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 150px; /* Set a fixed width for the dropdown */
-    margin-right: 10px; /* Space between select and search */
+    width: 150px;
+    /* Set a fixed width for the dropdown */
+    margin-right: 10px;
+    /* Space between select and search */
 }
 
 .search-container {
     display: flex;
-    align-items: center; /* Center the search input */
+    align-items: center;
+    /* Center the search input */
 }
 
 .search-input {
@@ -138,5 +152,6 @@
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 200px; /* Set a fixed width for the search input */
+    width: 200px;
+    /* Set a fixed width for the search input */
 }

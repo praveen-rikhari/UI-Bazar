@@ -186,7 +186,10 @@ function PostList({ apiUrl, headingText }) {
                                 />
                             </div>
                             <div className="card-footer">
-                                <span className="user-name">{post.userFullName}</span>
+
+                                <button onClick={() => handleSaveToFav(post._id)}>
+                                    Add to Favourite
+                                </button>
                                 <div className="footer-right">
 
                                     <Like
@@ -202,9 +205,9 @@ function PostList({ apiUrl, headingText }) {
                                 </div>
                             </div>
                             <br />
-                            <button onClick={() => handleSaveToFav(post._id)}>
-                                Save to Fav
-                            </button>
+                            <span className="user-name">
+                                By {post.userFullName}
+                            </span>
                         </div>
                     ))}
             </div>
