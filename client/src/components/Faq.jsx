@@ -10,20 +10,20 @@ function Faq() {
 
     const faqs = [
         {
-            question: "Question",
-            answer: "Answer"
+            question: "Do we need to create an account for accessing snippets?",
+            answer: "No Ui-bazar do not offers such case to there users. However if you need to create your own snippet then you will need to create an account."
         },
         {
-            question: "Question",
-            answer: "Answer"
+            question: "What kind of snippets do you have?",
+            answer: "The UI-bazar library offers a collection of over 250 free, open-source HTML and CSS snippets, including buttons, checkboxes, loaders, toggle switches, and input fields. These snippets provide valuable tools to enhance and elevate the quality of your project."
         },
         {
-            question: "Question",
-            answer: "Answer"
+            question: "How we can create a snippet?",
+            answer: "To create a snippet you need to SignUp and then go to create page and you will find a code editor with live result display. So create post and share"
         },
         {
-            question: "Question",
-            answer: "Answer"
+            question: "How to report a query?",
+            answer: "To report a query you can raise an issue on the github page of Ui-Bazar or you can write a mail down to creators"
         }
     ];
 
