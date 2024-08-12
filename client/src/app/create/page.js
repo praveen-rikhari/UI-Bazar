@@ -13,10 +13,8 @@ const Create = () => {
     const [cssCode, setCssCode] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [successMessage, setSuccessMessage] = useState(false);
-    // const { isLoaded, userId, sessionId, getToken } = useAuth();
     const { user } = useUser()
     const [errors, setErrors] = useState({});
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -72,14 +70,23 @@ const Create = () => {
     return (
         <div className="create-page">
             <h1>Create a new Snippet</h1>
-            <CodeEditor />
+
+            <CodeEditor
+                htmlCode={htmlCode}
+                setHtmlCode={setHtmlCode}
+                cssCode={cssCode}
+                setCssCode={setCssCode}
+            />
 
             <div className="snippet-form">
-                {successMessage && (
-                    <div className="success-message">
-                        Your UI snippet has been submitted! You can view it on the browse page.
-                    </div>
-                )}
+                {
+                    successMessage && (
+                        <div className="success-message">
+                            Your UI snippet has been submitted! You can view it on the browse page.
+                        </div>
+                    )
+                }
+
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Snippet Name:</label>
@@ -90,7 +97,13 @@ const Create = () => {
                             onChange={(e) => setName(e.target.value)}
                             disabled={isSubmitting} // Disable the input fields
                         />
-                        {errors.name && <span className="error-message">{errors.name}</span>}
+
+                        {
+                            errors.name &&
+                            <span className="error-message">
+                                {errors.name}
+                            </span>
+                        }
                     </div>
                     <div>
                         <label>Category:</label>
@@ -100,16 +113,14 @@ const Create = () => {
                             disabled={isSubmitting} // Disable the input fields
                         >
                             <option value="">Select a category</option>
-                            <option value="Button">Button</option>
-                            <option value="CheckBox">CheckBox</option>
-                            <option value="Toggle Switches">Toggle Switches</option>
-                            <option value="Card">Card</option>
-                            <option value="Input">Input</option>
-                            <option value="Loader">Loader</option>
-                            <option value="Forms">Forms</option>
-                            <option value="Other">Other</option>
                         </select>
-                        {errors.category && <span className="error-message">{errors.category}</span>}
+
+                        {
+                            errors.category &&
+                            <span className="error-message">
+                                {errors.category}
+                            </span>
+                        }
                     </div>
                     <div>
                         <label>HTML Code:</label>
@@ -118,7 +129,13 @@ const Create = () => {
                             onChange={(e) => setHtmlCode(e.target.value)}
                             disabled={isSubmitting} // Disable the input fields
                         />
-                        {errors.htmlCode && <span className="error-message">{errors.htmlCode}</span>}
+
+                        {
+                            errors.htmlCode &&
+                            <span className="error-message">
+                                {errors.htmlCode}
+                            </span>
+                        }
                     </div>
                     <div>
                         <label>CSS Code:</label>
@@ -127,10 +144,18 @@ const Create = () => {
                             onChange={(e) => setCssCode(e.target.value)}
                             disabled={isSubmitting} // Disable the input fields
                         />
-                        {errors.cssCode && <span className="error-message">{errors.cssCode}</span>}
+
+                        {
+                            errors.cssCode &&
+                            <span className="error-message">
+                                {errors.cssCode}
+                            </span>
+                        }
                     </div>
                     <button type="submit" disabled={isSubmitting}>
-                        {isSubmitting ? 'Submitting......' : 'Submit'}
+                        {
+                            isSubmitting ? 'Submitting......' : 'Submit'
+                        }
                     </button>
                 </form>
             </div>
