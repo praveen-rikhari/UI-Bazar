@@ -1,11 +1,9 @@
 "use client"
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import './CodeEditor.css';
 
-const CodeEditor = () => {
-    const [htmlCode, setHtmlCode] = useState('');
-    const [cssCode, setCssCode] = useState('');
+const CodeEditor = ({ htmlCode, setHtmlCode, cssCode, setCssCode }) => {
     const [activeEditor, setActiveEditor] = useState('html');
 
     const handleHtmlChange = (value) => {
@@ -15,6 +13,7 @@ const CodeEditor = () => {
     const handleCssChange = (value) => {
         setCssCode(value);
     };
+
     const active = {
         padding: '0.5rem 1rem',
         border: '1px solid #0070f3',
@@ -23,7 +22,7 @@ const CodeEditor = () => {
         background: '#0070f3',
         color: '#fff',
         margin: '0 0.5rem',
-        transition: 'background 0.3s, color 0.3s', // Add transition for smoother interaction
+        transition: 'background 0.3s, color 0.3s',
     };
 
     const inactive = {
@@ -50,40 +49,44 @@ const CodeEditor = () => {
                         CSS
                     </button>
                 </div>
-                {activeEditor === 'html' ? (
-                    <Editor
-                        height="500px"
-                        language="html"
-                        value={htmlCode}
-                        onChange={handleHtmlChange}
-                        theme="vs-dark"
-                    />
-                ) : (
-                    <Editor
-                        height="500px"
-                        language="css"
-                        value={cssCode}
-                        onChange={handleCssChange}
-                        theme="vs-dark"
-                    />
-                )}
+                {
+                    activeEditor === 'html' ? (
+                        <Editor
+                            height="500px"
+                            language="html"
+                            value={htmlCode}
+                            onChange={handleHtmlChange}
+                            theme="vs-dark"
+                        />
+                    ) : (
+                        <Editor
+                            height="500px"
+                            language="css"
+                            value={cssCode}
+                            onChange={handleCssChange}
+                            theme="vs-dark"
+                        />
+                    )
+                }
             </div>
             <div className="previewSection">
                 <h3>Result</h3>
                 <iframe
                     className="result"
-                    srcDoc={`
-                    <!DOCTYPE html>
-                    <html>
-                        <head>
-                            <style>
-                                ${cssCode}
-                            </style>
-                        </head>
-                        <body>
-                            ${htmlCode}
-                        </body>
-                    </html>`}
+                    srcDoc=
+                    {
+                        `<!DOCTYPE html>
+                        <html>
+                            <head>
+                                <style>
+                                    ${cssCode}
+                                </style>
+                            </head>
+                            <body>
+                                ${htmlCode}
+                            </body>
+                        </html>`
+                    }
                 />
             </div>
         </div>
