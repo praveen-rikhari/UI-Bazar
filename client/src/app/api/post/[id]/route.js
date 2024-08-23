@@ -25,3 +25,19 @@ export async function DELETE(req, { params }) {
         return NextResponse.json("error in deleting")
     }
 }
+
+export async function PUT(req, { params }) {
+    try {
+        dbConnect();
+        const { name, description, category, htmlCode, cssCode } = await req.json();
+
+        const updatedPostData = await Post.findByIdAndUpdate(
+            params.id,
+            { name, description, category, htmlCode, cssCode },
+        );
+        return NextResponse.json(updatedPostData);
+    } catch (error) {
+        console.log("Error updating post:", error);
+        return NextResponse.json("Error in updating post");
+    }
+}
