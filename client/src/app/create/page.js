@@ -113,6 +113,14 @@ const Create = () => {
                             disabled={isSubmitting} // Disable the input fields
                         >
                             <option value="">Select a category</option>
+                            <option value="Button">Button</option>
+                            <option value="CheckBox">CheckBox</option>
+                            <option value="Toggle Switches">Toggle Switches</option>
+                            <option value="Card">Card</option>
+                            <option value="Input">Input</option>
+                            <option value="Loader">Loader</option>
+                            <option value="Forms">Forms</option>
+                            <option value="Other">Other</option>
                         </select>
 
                         {
