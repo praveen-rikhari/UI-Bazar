@@ -40,7 +40,7 @@ const SnipPage = ({ params }) => {
 
     // fucntion to add comment
     const addComment = (newComment) => {
-        setAllComments((prevComments) => [ newComment,...prevComments]);
+        setAllComments((prevComments) => [newComment, ...prevComments]);
     };
 
     // function to delete comment
@@ -68,7 +68,7 @@ const SnipPage = ({ params }) => {
         const fetchComments = async () => {
             try {
                 const response = await axios.get(`/api/comment/${posts._id}`);
-                        // Reverse the order of comments to show the latest first
+                // Reverse the order of comments to show the latest first
                 setAllComments(response.data.reverse());
             } catch (error) {
                 console.error("Error fetching comments:", error);
@@ -115,9 +115,20 @@ const SnipPage = ({ params }) => {
                             </span>
                         </span>
                         <div className="post-actions">
-                            <button>Edit</button>
-                            {posts.userId === userId && <Link href="/browse">
-                                <button onClick={() => handlePostDelete(params.id)}>Delete</button></Link>
+                            {
+                                posts.userId === userId && (
+                                    <Link href={`/edit/${params.id}`}>
+                                        <button>Edit</button>
+                                    </Link>
+                                )
+                            }
+
+                            {
+                                posts.userId === userId && (
+                                    <Link href="/browse">
+                                        <button onClick={() => handlePostDelete(params.id)}>Delete</button>
+                                    </Link>
+                                )
                             }
                         </div>
                     </h3>
