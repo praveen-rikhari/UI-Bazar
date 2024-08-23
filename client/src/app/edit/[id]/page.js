@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUser } from '@clerk/nextjs';
 import CodeEditor from '@/components/CodeEditor';
-import "./edit.css";
+import "../../create/create.css";
 
 const Edit = ({ params }) => {
     const [post, setPost] = useState({});
@@ -60,7 +60,7 @@ const Edit = ({ params }) => {
     };
 
     return (
-        <div className="edit-page">
+        <div className="page edit-page">
             <h1>Edit Snippet</h1>
 
             <CodeEditor

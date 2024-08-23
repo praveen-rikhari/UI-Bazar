@@ -1,4 +1,4 @@
-.create-page {
+.page {
     padding: 40px;
     max-width: 1200px;
     margin: 0 auto;
@@ -7,7 +7,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.create-page h1 {
+.page h1 {
     text-align: center;
     margin-bottom: 30px;
     color: #333;

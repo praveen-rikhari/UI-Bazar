@@ -68,7 +68,7 @@ const Create = () => {
     };
 
     return (
-        <div className="create-page">
+        <div className="page create-page">
             <h1>Create a new Snippet</h1>
 
             <CodeEditor
