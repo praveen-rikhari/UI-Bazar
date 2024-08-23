@@ -13,7 +13,8 @@ const Edit = ({ params }) => {
     const [htmlCode, setHtmlCode] = useState('');
     const [cssCode, setCssCode] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const { user } = useUser();
+
+    const [successMessage, setSuccessMessage] = useState(false);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -50,7 +51,11 @@ const Edit = ({ params }) => {
             const response = await axios.put(`/api/post/${params.id}`, updatedPost);
             if (response) {
                 console.log("Post updated successfully", response);
-                alert("Updated post successfully");
+                setSuccessMessage(true);
+
+                setTimeout(() => {
+                    setSuccessMessage(false);
+                }, 5000);
             }
         } catch (error) {
             console.error("Error while updating post: ", error);
@@ -71,6 +76,13 @@ const Edit = ({ params }) => {
             />
 
             <div className="snippet-form">
+                {
+                    successMessage && (
+                        <div className="success-message">
+                            Your UI snippet has been updated successfully! You can view it on the browse page.
+                        </div>
+                    )
+                }
                 <form onSubmit={handleSubmit}>
                     <div>
                         <label>Snippet Name:</label>
@@ -107,6 +119,22 @@ const Edit = ({ params }) => {
                             <option value="Forms">Forms</option>
                             <option value="Other">Other</option>
                         </select>
+                    </div>
+                    <div>
+                        <label>HTML Code:</label>
+                        <textarea
+                            value={htmlCode}
+                            onChange={(e) => setHtmlCode(e.target.value)}
+                            disabled={isSubmitting}
+                        />
+                    </div>
+                    <div>
+                        <label>CSS Code:</label>
+                        <textarea
+                            value={cssCode}
+                            onChange={(e) => setCssCode(e.target.value)}
+                            disabled={isSubmitting}
+                        />
                     </div>
                     <button type="submit" disabled={isSubmitting}>
                         {isSubmitting ? 'Updating...' : 'Update Snippet'}

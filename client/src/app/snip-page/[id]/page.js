@@ -5,7 +5,6 @@ import axios from "axios";
 import "./SnipPage.css";
 import Link from 'next/link';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Comment from "@/components/Comment";
 import './Comments.css';
 import formatDateTime from "@/formatDateTime";
@@ -187,7 +186,6 @@ const SnipPage = ({ params }) => {
 
                                     <SyntaxHighlighter
                                         language={activeTab === "html" ? "html" : "css"}
-                                        style={atomOneDark}
                                         showLineNumbers
                                     >
                                         {activeTab === "html" ? posts.htmlCode : posts.cssCode}
