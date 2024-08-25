@@ -35,7 +35,7 @@ function Faq() {
         <div className="faq-all">
             <div className="faq-container">
                 <div className="header-section">
-                    <h1>FAQ's</h1>
+                    <h1>FAQ&apos;s</h1>
                     <div className="image-container">
                         <Image
                             src="/faq.svg"
